@@ -1,8 +1,6 @@
 <html>
     <script>
         function load(){
-            document.getElementById("loggedin").disabled = true;
-            document.getElementById("notloggedin").disabled = true;
             // Variables
             var token = "";
             var cookie = "login";
@@ -28,13 +26,10 @@
                         var response = JSON.parse(this.responseText);
                         if (response.Success){
                             if (response.Message.code == 200){
-                                document.getElementById("loggedin").disabled = false;
                                 document.getElementById("loggedin").children["username"].innerHTML = "Getting user";
+                                document.getElementsById("notloggedin").remove();
                                 GetUserData(response.Message.PlayFabId);
                             }
-                        }
-                        else{
-                            document.getElementById("notloggedin").disabled = false;
                         }
                         console.log(this.responseText);
                         console.log("Logged in");
@@ -75,7 +70,9 @@
                 }
             }
 
-            DataRequest.open("GET", "https://fishgame.azurewebsites.net/api/players/v1/get?playFabId=" + userid);
+            var r = 'https://fishgame.azurewebsites.net/api/players/v1/get?playFabId=' + userid;
+            console.log(r);
+            DataRequest.open("GET", r);
             DataRequest.send();
         }
 
@@ -97,7 +94,6 @@
         }
     </script>
     <style>
-
         /* width */
         ::-webkit-scrollbar {
           width: 10px;
@@ -166,12 +162,12 @@
                 <a href="https://soundcloud.com/fishgame"><img src="https://fishgamevr.com/Headphones.png" width="40" height="40"></a>
             </div>
 
-            <div id="loggedin" style="vertical-align: middle; display: inline-block; margin-left: 80%">
-                <a id="username" style= "font-family: Arial; margin-right: auto">Hello</a>
+            <div id="loggedin" style="vertical-align: middle; display: inline-block; margin-right: 0px">
                 <img id="profileimage">
+                <a id="username" style= "font-family: Arial; margin-right: auto"></a>
             </div>
 
-            <div id="notloggedin" style="vertical-align: middle; display: inline-block; margin-left: 80%">
+            <div id="notloggedin" style="vertical-align: middle; display: inline-block; margin-right: 0px">
                 <button class="button" onclick="window.location.href = 'https://auth.oculus.com/sso/?redirect_uri=https%3A%2F%2Ffishgamevr.com%2Flogin&organization_id=426036418974185','_blank'">Login</button>
             </div>
             <!-- <a href="https://fishgamevr.com/privacy-policy" class="button"><pre style="word-wrap: break-word; white-space: pre-wrap;">Privacy Policy</pre></a> --->
