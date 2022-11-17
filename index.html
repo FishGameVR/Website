@@ -1,6 +1,7 @@
 <html>
     <script>
         function load(){
+
             // Variables
             var token = "";
             var cookie = "login";
@@ -27,7 +28,7 @@
                         if (response.Success){
                             if (response.Message.code == 200){
                                 document.getElementById("loggedin").children["username"].innerHTML = "Getting user";
-                                document.getElementsById("notloggedin").remove();
+                                document.getElementById("notloggedin").remove();
                                 GetUserData(response.Message.PlayFabId);
                             }
                         }
@@ -50,9 +51,6 @@
                 LoginRequest.open("POST", "https://fishgame.azurewebsites.net/api/auth/v1/sso/login");
                 LoginRequest.send(JSON.stringify(request));
             }
-            else{
-                document.getElementById("notloggedin").disabled = false;
-            }
         }
 
         function GetUserData(userid){
@@ -65,7 +63,7 @@
                         document.getElementById("loggedin").children["profileimage"].innerHTML = data.Message.AvatarUrl;
                     }
                     else{
-                        document.getElementById("loggedin").disabled = true;
+                        document.getElementsById("loggedin").children["username"].innerHTML = "Failed";
                     }
                 }
             }
