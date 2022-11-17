@@ -29,7 +29,7 @@
                         if (response.Success){
                             if (response.Message.code == 200){
                                 document.getElementById("loggedin").disabled = false;
-                                document.getElementsById("loggedin").children["username"].innerHTML = "Getting user";
+                                document.getElementById("loggedin").children["username"].innerHTML = "Getting user";
                                 GetUserData(response.Message.PlayFabId);
                             }
                         }
