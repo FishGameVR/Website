@@ -67,7 +67,7 @@
                     var data = JSON.parse(this.responseText);
                     if (data.Success){
                         document.getElementsById("loggedin").children["username"].innerHTML = data.Message.DisplayName;
-                        document.getElementsById("loggedin").children["profileimage"].innerHTML = data.Message.AvatarUrl;
+                        document.getElementById("loggedin").children["profileimage"].innerHTML = data.Message.AvatarUrl;
                     }
                     else{
                         document.getElementById("loggedin").disabled = true;
@@ -172,7 +172,7 @@
             </div>
 
             <div id="notloggedin" style="vertical-align: middle; display: inline-block; margin-left: 80%">
-                <button class="button" onclick="window.open('https://auth.oculus.com/sso/?redirect_uri=https%3A%2F%2Ffishgamevr.com%2Flogin&organization_id=426036418974185','_blank')">Login</button>
+                <button class="button" onclick="window.location.href = 'https://auth.oculus.com/sso/?redirect_uri=https%3A%2F%2Ffishgamevr.com%2Flogin&organization_id=426036418974185','_blank'">Login</button>
             </div>
             <!-- <a href="https://fishgamevr.com/privacy-policy" class="button"><pre style="word-wrap: break-word; white-space: pre-wrap;">Privacy Policy</pre></a> --->
         </div>
