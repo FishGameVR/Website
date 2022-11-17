@@ -76,7 +76,7 @@
             }
 
             DataRequest.open("GET", "https://fishgame.azurewebsites.net/api/players/v1/get?playFabId=" + userid);
-            DataRequest.send(JSON.stringify(request));
+            DataRequest.send();
         }
 
         function getCookie(cookie)
