@@ -29,7 +29,7 @@
                             if (response.Message.code == 200){
                                 document.getElementById("loggedin").children["username"].innerHTML = "Getting user";
                                 document.getElementById("notloggedin").remove();
-                                GetUserData(response.Message.PlayFabId);
+                                GetUserData(response.Message.data.PlayFabId);
                             }
                         }
                         console.log(this.responseText);
@@ -59,11 +59,11 @@
                 if (this.readyState == 4 && this.status == 200) {
                     var data = JSON.parse(this.responseText);
                     if (data.Success){
-                        document.getElementsById("loggedin").children["username"].innerHTML = data.Message.DisplayName;
+                        document.getElementById("loggedin").children["username"].innerHTML = data.Message.DisplayName;
                         document.getElementById("loggedin").children["profileimage"].innerHTML = data.Message.AvatarUrl;
                     }
                     else{
-                        document.getElementsById("loggedin").children["username"].innerHTML = "Failed";
+                        document.getElementById("loggedin").children["username"].innerHTML = "Failed";
                     }
                 }
             }
