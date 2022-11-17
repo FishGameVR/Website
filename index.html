@@ -60,7 +60,7 @@
                     var data = JSON.parse(this.responseText);
                     if (data.Success){
                         document.getElementById("loggedin").children["username"].innerHTML = data.Message.DisplayName;
-                        document.getElementById("loggedin").children["profileimage"].innerHTML = data.Message.AvatarUrl;
+                        document.getElementById("loggedin").children["profileimage"].setAttribute("src", data.Message.AvatarUrl);
                     }
                     else{
                         document.getElementById("loggedin").children["username"].innerHTML = "Failed";
@@ -143,6 +143,9 @@
         }
         .button:hover {
             color: #0084ff;
+        }
+        .pfp{
+            border-radius: 50%;
         }
 
     </style>
