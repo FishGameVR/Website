@@ -1,6 +1,8 @@
 <html>
     <script>
         function load(){
+            document.getElementById("loggedin").disabled = true;
+            document.getElementById("notloggedin").disabled = true;
             // Variables
             var token = "";
             var cookie = "login";
@@ -20,10 +22,20 @@
                 console.log(document.cookie);
                 let data = atob(token.toString());
 
-                const Http = new XMLHttpRequest();
-                Http.onreadystatechange = function() {
+                const LoginRequest = new XMLHttpRequest();
+                LoginRequest.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         var response = JSON.parse(this.responseText);
+                        if (response.Success){
+                            if (response.Message.code == 200){
+                                document.getElementById("loggedin").disabled = false;
+                                document.getElementsById("username").innerHTML = "Getting user";
+                                GetUserData(response.Message.PlayFabId);
+                            }
+                        }
+                        else{
+                            document.getElementById("notloggedin").disabled = false;
+                        }
                         console.log(this.responseText);
                         console.log("Logged in");
                     }
@@ -40,9 +52,31 @@
                 console.log(request);
 
             
-                Http.open("POST", "https://fishgame.azurewebsites.net/api/auth/v1/sso/login");
-                Http.send(JSON.stringify(request));
-            } 
+                LoginRequest.open("POST", "https://fishgame.azurewebsites.net/api/auth/v1/sso/login");
+                LoginRequest.send(JSON.stringify(request));
+            }
+            else{
+                document.getElementById("notloggedin").disabled = false;
+            }
+        }
+
+        function GetUserData(userid){
+            const DataRequest = new XMLHttpRequest()
+            DataRequest.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                    if (data.Success){
+                        document.getElementsById("username").innerHTML = data.Message.DisplayName;
+                        document.getElementsById("profileimage").innerHTML = data.Message.AvatarUrl;
+                    }
+                    else{
+                        document.getElementById("loggedin").disabled = true;
+                    }
+                }
+            }
+
+            DataRequest.open("GET", "https://fishgame.azurewebsites.net/api/players/v1/get?playFabId=" + userid);
+            DataRequest.send(JSON.stringify(request));
         }
 
         function getCookie(cookie)
@@ -127,8 +161,19 @@
     	<meta content="#00AEFF" data-react-helmet="true" name="theme-color" />
         <link rel = "icon" href = "https://fishgamevr.com/HappiFish.png" type = "image/x-icon">
         <div class="header">
-            <a href="https://fishgamevr.com/"><img src="https://fishgamevr.com/FishGameTopThing.png" width="107" height="40"></a>
-            <a href="https://soundcloud.com/fishgame"><img src="https://fishgamevr.com/Headphones.png" width="40" height="40"></a>
+            <div id="navbuttons" style="vertical-align: middle; display: inline-block;">
+                <a href="https://fishgamevr.com/"><img src="https://fishgamevr.com/FishGameTopThing.png" width="107" height="40"></a>
+                <a href="https://soundcloud.com/fishgame"><img src="https://fishgamevr.com/Headphones.png" width="40" height="40"></a>
+            </div>
+
+            <div id="loggedin" style="vertical-align: middle; display: inline-block; margin-left: 80%">
+                <a id="username" style= "font-family: Arial; margin-right: auto">Hello</a>
+                <img id="profileimage">
+            </div>
+
+            <div id="notloggedin" style="vertical-align: middle; display: inline-block; margin-left: 80%">
+                <button class="button" onclick="window.open('https://auth.oculus.com/sso/?redirect_uri=https%3A%2F%2Ffishgamevr.com%2Flogin&organization_id=426036418974185','_blank')">Login</button>
+            </div>
             <!-- <a href="https://fishgamevr.com/privacy-policy" class="button"><pre style="word-wrap: break-word; white-space: pre-wrap;">Privacy Policy</pre></a> --->
         </div>
     </head>
