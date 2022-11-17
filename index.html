@@ -29,7 +29,7 @@
                         if (response.Success){
                             if (response.Message.code == 200){
                                 document.getElementById("loggedin").disabled = false;
-                                document.getElementsById("username").innerHTML = "Getting user";
+                                document.getElementsById("loggedin").children["username"].innerHTML = "Getting user";
                                 GetUserData(response.Message.PlayFabId);
                             }
                         }
@@ -66,8 +66,8 @@
                 if (this.readyState == 4 && this.status == 200) {
                     var data = JSON.parse(this.responseText);
                     if (data.Success){
-                        document.getElementsById("username").innerHTML = data.Message.DisplayName;
-                        document.getElementsById("profileimage").innerHTML = data.Message.AvatarUrl;
+                        document.getElementsById("loggedin").children["username"].innerHTML = data.Message.DisplayName;
+                        document.getElementsById("loggedin").children["profileimage"].innerHTML = data.Message.AvatarUrl;
                     }
                     else{
                         document.getElementById("loggedin").disabled = true;
