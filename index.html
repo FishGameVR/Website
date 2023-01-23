@@ -16,7 +16,7 @@
                 }
             }
 
-            motd.open("GET", "https://fishgame.azurewebsites.net/api/data/v1/motd");
+            motd.open("GET", "https://fishgame.azurewebsites.net/api/data/v1/motd?type=web");
             motd.send();
 	}
     </script>
@@ -78,6 +78,11 @@
             width: 40;
             height: 40;
         }
+	html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
     </style>
     <head>
@@ -120,4 +125,7 @@
 	    <iframe src="https://www.applabdb.com/" height="500" width="350" style="border:0;overflow:hidden"></iframe>
         </div>
     </body>
+	<footer>
+        <img src="https://fishgamevr.com/OceanFloor.png" width="100%" style="margin: auto; display: block; padding: 0">
+    </footer>
 </html>
