@@ -18,12 +18,9 @@
     </div>
     <script src="Build/Build.loader.js"></script>
     <script>
-      var height = document.innerHeight;
-      var width = document.innterWidth;
-
       var canvas = document.getElementById("unity-canvas");
-      canvas.style.height = height + "px";
-      canvas.style.width = width + "px";
+      canvas.style.height = innerHeight + "px";
+      canvas.style.width = innterWidth + "px";
       
       createUnityInstance(document.querySelector("#unity-canvas"), {
         dataUrl: "Build/Build.data",
