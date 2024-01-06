@@ -14,7 +14,7 @@
   </head>
   <body style="text-align: center">
     <div style="display: table; width: 100%; height: 100%">
-      <canvas id="unity-canvas" width=100% height=100% style="width: 100%; height: 100%; background: #231F20"></canvas>
+      <canvas id="unity-canvas"background: #231F20"></canvas>
     </div>
     <script src="Build/Build.loader.js"></script>
     <script>
@@ -29,6 +29,13 @@
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       });
+
+      var height = document.innerHeight;
+      var width = document.innterWidth;
+
+      var canvas = document.getElementById("unity-canvas);
+      canvas.style.height = height + "px";
+      canvas.style.width = width + "px";
     </script>
   </body>
 </html>
