@@ -44,6 +44,7 @@
                         else{
                             getChildById(element, "rating").innerHTML = `Rating: Not rated`;
                         }
+                        getChildById(element, "viewButton").onclick = function() { window.open('https://fishgamevr.com/maps/mapviewer?map=' + map.FriendlyId) };
                         document.getElementById("searchContainer").appendChild(element);
                         document.getElementById("searchContainer").style = "";
                     });
@@ -189,7 +190,10 @@
                             <br>
                             <a id="creator" style="font-family: Arial, Gadget, sans-serif;">Made by fchb1239</a>
                         </div>
-                        <div id="dataDefault" style="margin-left: 20px; margin-top: 50%;">
+                        <div id="buttonContainer" style="margin-left: 20px; margin-top: 20px">
+                            <button id="viewButton" class="button" onclick="">View</button>
+                        </div>
+                        <div id="dataDefault" style="margin-left: 20px; margin-top: 30px;">
                             <a id="created" style="font-family: Arial, Gadget, sans-serif;">Created: 27/12/2023</a>
                             <br>
                             <a id="rating" style="font-family: Arial, Gadget, sans-serif;">Rating: 5/5</a>
