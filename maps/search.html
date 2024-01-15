@@ -7,7 +7,7 @@
             const searchBar = document.getElementById("searchBar");
 
             if (params.length > 0){
-                searchBar.value = params.replace("?search=", "")
+                searchBar.value = params.replace("?search=", "").replace("%20", " ");
             }
 
             searchBar.addEventListener("keyup", function(event) {
